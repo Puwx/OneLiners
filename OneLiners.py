@@ -17,4 +17,10 @@ DMStoDD = lambda row: sum([x/y for x, y in zip([float(x) for x in row[:-1].split
 #Get the number of occurences for each of the values found in 'field' in the feature class 'fc'.
 fieldValCounter = lambda fc,field: dict(Counter([str(row[0]).encode('ascii') for row in arcpy.da.SearchCursor(fc,field)])
 
+
+#Highlight specific values in a pandas dataframe using the style attribute and apply method.]
+highVal = lambda data,value:['background-color:red;font-weight:bold' if row==value else '' for row in data]
+#Usage: styledDF = df.style.apply(highVal,value='VALUE_TO_HIGHLIGHT',subset=['col1','col2','col3'])                                       
+
+                                        
 #More to come...
