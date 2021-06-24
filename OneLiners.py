@@ -1,9 +1,7 @@
 import os
 import arcpy
-
-from collections import Counter
-
 import pandas as pd
+from collections import Counter
 
 #Create a Pandas DataFrame out of a ArcGIS feature class table - must have env set to dir containing feature class to convert.
 FCtoDF = lambda x: pd.DataFrame([r for r in arcpy.da.SearchCursor(x,'*')],columns=[f.name for f in arcpy.ListFields(x)])
