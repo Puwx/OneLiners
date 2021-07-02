@@ -29,4 +29,7 @@ it_to_df = lambda it: pd.DataFrame([[*i] for i in sorted(it)],columns=["BEGIN","
 #Converts a DataFrame to an IntervalTree object - df = DataFrame, b = Begin column name, e = end column name, d = data column name
 df_to_it = lambda df,b,e,d: IntervalTree([Interval(x[b],x[e],x[d]) for i,x in df.iterrows()])
                                         
+#Create a grouped id column in pandas - ids with go from 0 to N-1 (N = number of items in each group) for each of the groups.
+df["ID"] = df.groupby("GROUPS").apply(lambda x: list(range(0,len(x)))).explode().values                                                                        
+
 #More to come...
