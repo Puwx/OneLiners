@@ -32,4 +32,23 @@ df_to_it = lambda df,b,e,d: IntervalTree([Interval(x[b],x[e],x[d]) for i,x in df
 #Create a grouped id column in pandas - ids with go from 0 to N-1 (N = number of items in each group) for each of the groups.
 df["ID"] = df.groupby("GROUPS").apply(lambda x: list(range(0,len(x)))).explode().values                                                                        
 
+#Create a dictionary of all the fields in an feature class and the associated attributes
+fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_")} for f in arcpy.ListFields(fc)}
+#Example of the out from function below:
+"""
+{'aliasName': 'REV',
+'baseName': 'REV',
+'defaultValue': None,
+'domain': '',
+'editable': True,
+'isNullable': True,
+'length': 254,
+'name': 'REV',
+'precision': 0,
+'required': False,
+'scale': 0,
+'type': 'String'}
+"""
+                                        
+                                        
 #More to come...
