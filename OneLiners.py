@@ -34,9 +34,9 @@ df["ID"] = df.groupby("GROUPS").apply(lambda x: list(range(0,len(x)))).explode()
 
 #Create a dictionary of all the fields in an feature class and the associated attributes
 fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_")} for f in arcpy.ListFields(fc)}
-#Example of the out from function below:
+#Example of the out from function above:
 """
-{'aliasName': 'REV',
+"{'REV':{'aliasName': 'REV',
 'baseName': 'REV',
 'defaultValue': None,
 'domain': '',
@@ -47,7 +47,7 @@ fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_"
 'precision': 0,
 'required': False,
 'scale': 0,
-'type': 'String'}
+'type': 'String'}}
 """
                                         
                                         
