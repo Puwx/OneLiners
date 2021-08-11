@@ -49,6 +49,8 @@ fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_"
 'scale': 0,
 'type': 'String'}}
 """
-                                        
-                                        
+#Creates an arcpy Polyline from grouped arcpy points using a Pandas groupby object - meant to be used with arcgis python api SpatialDataFrames
+groupPtsToLine = lambda d,g: d.groupby(g).agg({"SHAPE":lambda pts: arcpy.Polyline(arcpy.Array([arcpy.Point(*p) for p in pts]))})                                  
+# d = DataFrame containing a column ("SHAPE") that has arcpy Point objects, g = field used to group the objects
+
 #More to come...
