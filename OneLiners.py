@@ -30,7 +30,7 @@ it_to_df = lambda it: pd.DataFrame([[*i] for i in sorted(it)],columns=["BEGIN","
 df_to_it = lambda df,b,e,d: IntervalTree([Interval(x[b],x[e],x[d]) for i,x in df.iterrows()])
                                         
 #Create a grouped id column in pandas - ids with go from 0 to N-1 (N = number of items in each group) for each of the groups.
-df["ID"] = df.groupby("GROUPS").apply(lambda x: list(range(0,len(x)))).explode().values                                                                        
+df["ID"] = df.groupby("GROUPS").apply(lambda x: list(range(0,len(x)))).explode().values # -> Reviewing this - unexpected results recently.                                                                 
 
 #Create a dictionary of all the fields in an feature class and the associated attributes
 fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_")} for f in arcpy.ListFields(fc)}
