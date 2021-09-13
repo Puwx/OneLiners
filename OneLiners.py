@@ -10,7 +10,7 @@ FCtoDF = lambda x: pd.DataFrame([r for r in arcpy.da.SearchCursor(x,'*')],column
 findFiles = lambda fp,soi: [os.path.join(r,f) for r,_,fs in os.walk(fp) for f in fs if soi in f]
 
 #Convert a DMS string seperated by spaces e.g. 51 43 19.533N to a DD value e.g. 51.722093
-DMStoDD = lambda row: sum([x/y for x, y in zip([float(x) for x in row[:-1].split(' ')], [1, 60, 3600])]) * (-1 if row[-1] in ('S', 'W') else 1)
+DMStoDD = lambda row: sum([x/y for x, y in zip([float(x) for x in row[:-1].split()], [1, 60, 3600])]) * (-1 if row[-1] in ('S', 'W') else 1)
 
 #Get the number of occurences for each of the values found in 'field' in the feature class 'fc'.
 fieldValCounter = lambda fc,field: dict(Counter([str(row[0]).encode('ascii') for row in arcpy.da.SearchCursor(fc,field)])
