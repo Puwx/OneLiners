@@ -19,10 +19,6 @@ fieldValCounter = lambda fc,field: dict(Counter([str(row[0]).encode('ascii') for
 highVal = lambda data,value:['background-color:red;font-weight:bold' if row==value else '' for row in data]
 #Usage: styledDF = df.style.apply(highVal,value='VALUE_TO_HIGHLIGHT',subset=['col1','col2','col3'])                                       
 
-#Reverse a list
-rvrs = lambda lst: [lst[x] for x in range(len(lst)-1,-1,-1)]
-#Usage: Reverses a list...
-
 #Converts and IntervalTree object to a Pandas DataFrame - keeps the data *Assumes no rows in df have same begin and end values
 it_to_df = lambda it: pd.DataFrame([[*i] for i in sorted(it)],columns=["BEGIN","END","DATA"]) 
                                         
