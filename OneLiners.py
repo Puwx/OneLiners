@@ -48,5 +48,11 @@ fs = {f.name:{a:getattr(f,a) for a in dir(arcpy.Field()) if not a.startswith("_"
 #Creates an arcpy Polyline from grouped arcpy points using a Pandas groupby object - meant to be used with arcgis python api SpatialDataFrames
 groupPtsToLine = lambda d,g: d.groupby(g).agg({"SHAPE":lambda pts: arcpy.Polyline(arcpy.Array([arcpy.Point(*p) for p in pts]))})                                  
 # d = DataFrame containing a column ("SHAPE") that has arcpy Point objects, g = field used to group the objects
-
+                                        
+#Breaks string into equal sized parts and the final part return the remainder if the part length provided (partLen) does evenly divide the string.                                     
+import math
+partStr  = lambda partLen,string: [string[i*partLen:(i*partLen)+partLen] if i+partLen<len(string) else string[i:len(string)] for i in range(0,math.ceil(len(string)/partLen))] 
+#Example: partStr(10,"x"*20) return [['xxxxxxxxxx'], ['xxxxxxxxxx']] while partStr(6,"x"*20) returns ['xxxxxx', 'xxxxxx', 'xxxxxx', 'xx']
+                                        
+                                        
 #More to come...
